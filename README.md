@@ -8,7 +8,7 @@
                             
                             
 
-[![NPM Version](https://nodei.co/npm/scribe.png?downloads=true)](https://npmjs.org/package/scribe)
+[![NPM Version](https://nodei.co/npm/node-scribe.png?downloads=true)](https://npmjs.org/package/node-scribe)
 [![Build Status](https://secure.travis-ci.org/belbis/scribe.png?branch=master)](http://travis-ci.org/belbis/scribe)
 [![Coverage Status](https://coveralls.io/repos/belbis/scribe/badge.svg)](https://coveralls.io/r/belbis/scribe)
 [![Dependency Status](https://gemnasium.com/belbis/scribe.svg)](https://gemnasium.com/belbis/scribe)
