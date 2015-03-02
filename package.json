@@ -1,0 +1,21 @@
+{
+  "name": "node-scribe",
+  "repository": "https://github.com/belbis/scribe",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "mocha test/scribe",
+    "jsdoc": "",
+    "coveralls": "jscoverage src && SCRIBE_COV=1 mocha test/scribe --reporter=mocha-lcov-reporter | coveralls",
+    "cov-html": "jscoverage src && SCRIBE_COV=1 mocha test/scribe --reporter=html-cov > coverage.html",
+    "jscoverage": "jscoverage src src-cov"
+  },
+  "devDependencies": {
+    "mocha": "2.1.0",
+    "mocha-lcov-reporter": "",
+    "jscoverage": "0.5.9",
+    "coveralls": "2.11.2"
+  },
+  "dependencies": {
+    "aws-sdk": "2.1.14"
+  }
+}
