@@ -28,7 +28,7 @@ util.inherits(STDOut, Scriptum);
  */
 STDOut.prototype.post = function(msg) {
   process.stdout.write(msg + "\n");
-  this.emit("logged");
+  this.emit("posted");
 };
 
 

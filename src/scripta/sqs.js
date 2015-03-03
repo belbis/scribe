@@ -42,6 +42,7 @@ SQS.prototype.init = function() {
  */
 SQS.prototype.post = function(msg) {
   this.queue.sendMessage(this._constructMessage(msg), this._msg_cb.bind(this));
+  this.emit("posted");
 };
 
 /**
