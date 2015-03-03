@@ -42,7 +42,6 @@ SQS.prototype.init = function() {
  */
 SQS.prototype.post = function(msg) {
   this.queue.sendMessage(this._constructMessage(msg), this._msg_cb.bind(this));
-  this.emit("posted");
 };
 
 /**
@@ -57,7 +56,7 @@ SQS.prototype._msg_cb = function(e,r) {
   if (e) {
     this.emit("error", e);
   } else {
-    this.emit("logged", r);
+    this.emit("posted", r);
   }
 };
 
