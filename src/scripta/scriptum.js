@@ -17,6 +17,7 @@ function Scriptum(options) {
 }
 util.inherits(Scriptum, events.EventEmitter);
 
+
 /**
  * init
  *
@@ -42,6 +43,17 @@ Scriptum.prototype.post = function(msg) {
  */
 Scriptum.prototype.shutdown = function() {
   this.emit("shutdown");
+};
+
+/**
+ * _error
+ *
+ * used to propogate error to scribe
+ * @param e
+ * @private
+ */
+Scriptum.prototype._error = function(e) {
+  this.emit("error", e)
 };
 
 
