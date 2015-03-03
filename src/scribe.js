@@ -65,6 +65,7 @@ Scribe.prototype.init = function(options) {
   for (var i=0;i<this.scripta.length;++i) {
     this.scripta[i].init();
   }
+  this.initialized = true;
 };
 
 /**
