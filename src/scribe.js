@@ -39,7 +39,11 @@ function Scribe(options) {
   // handle options
   options = options || {};
   this.name = options.name || "scribe"; // name of scribe
-  this.level = options.level || levels.INFO; // desired logging level
+  if (options.level) {
+    this.level = levels[options.level.toUpperCase()]
+  } else {
+    this.level = levels.INFO;
+  }
   this.levels = options.levels || levels;
   this.fixed = options.fixed || false; // fixed logging levels
 
@@ -272,6 +276,7 @@ Scribe.prototype.setLevels = function(lvls) {
 Scribe.prototype._error = function(scr, error) {
   this.emit("error", scr, error);
 };
+
 
 // export module
 module.exports = {
