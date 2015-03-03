@@ -14,11 +14,15 @@ describe("Scribe", function() {
   describe("constructor", function() {
     var s = scribe.getLogger();
     it("should have prototype", function() {
+
+      //(s.prototype, scribe.getLogger.prototype)
+
       assert(s.trace instanceof Function);
       assert(s.debug instanceof Function);
       assert(s.info instanceof Function);
       assert(s.warn instanceof Function);
       assert(s.error instanceof Function);
+      assert(s.fatal instanceof Function);
       assert(s.off instanceof Function);
       assert(s.info instanceof Function);
       assert(s.add instanceof Function);
@@ -43,6 +47,27 @@ describe("Scribe", function() {
       assert.equal(s.level, o.level);
     });
   });
+
+  describe("init", function() {
+    var s = scribe.getLogger();
+    it("should call scriptura init", function() {
+      var c = new scribe.scriptura.Console();
+      c.init = function() {
+        assert(1);
+      };
+      s.add(c);
+      s.init();
+    });
+  });
+
+  describe("shutdown", function() {
+    var s = scribe.getLogger();
+    it("should call scriptura shutdown", function() {
+      var c = new scribe.scriptura.Console();
+
+    });
+
+  })
 
   describe("setters", function() {
     //describe("setLevel", function() {
