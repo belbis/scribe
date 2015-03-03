@@ -69,30 +69,54 @@ describe("Scribe", function() {
   });
 
   describe("setters", function() {
-    //describe("setLevel", function() {
-    //  var s = scribe.getLogger();
-    //  it("update level to info", function() {
-    //    var newLevel = "off";
-    //    s.setLevel(newLevel);
-    //    assert.equal(scribe.levels[s.level], scribe.levels[newLevel.toUpperCase()])
-    //  });
-    //});
-
-    describe("scripta operations", function() {
+    it("setLevel", function() {
       var s = scribe.getLogger();
-      describe("add", function() {
-        it("should update scripta", function() {
-          var c = new scripta.Console({id: "console"});
-          s.add(c);
-          assert(s.scripta[0] instanceof scripta.Console);
-        });
-      });
+      var newLevel = "all";
+      s.setLevel(newLevel);
+      assert.equal(s.level, scribe.levels[newLevel.toUpperCase()])
+    });
 
-      describe("remove", function() {
-        it("should update scripta", function() {
-          s.remove("console");
-          assert.equal(s.scripta.length, 0);
-        });
+    it("setLevels", function() {
+      var s = scribe.getLogger();
+      var lvls = {};
+      s.setLevels(lvls);
+      assert.deepEqual(s.levels, lvls);
+    });
+  });
+
+  describe("getters", function() {
+    it("getLevel", function() {
+      var s = scribe.getLogger();
+      var l = s.getLevel();
+      assert.equal(l, scribe.levels.INFO);
+    });
+
+    it("getLevels", function() {
+      var s = scribe.getLogger();
+      assert.deepEqual(s.getLevels(), scribe.levels);
+    });
+  });
+
+  describe("error", function() {
+    it("emit", function() {
+      //implement me
+    });
+  });
+
+  describe("scripta operations", function() {
+    var s = scribe.getLogger();
+    describe("add", function() {
+      it("should update scripta", function() {
+        var c = new scripta.Console({id: "console"});
+        s.add(c);
+        assert(s.scripta[0] instanceof scripta.Console);
+      });
+    });
+
+    describe("remove", function() {
+      it("should update scripta", function() {
+        s.remove("console");
+        assert.equal(s.scripta.length, 0);
       });
     });
   });

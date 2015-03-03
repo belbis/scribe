@@ -39,12 +39,12 @@ function Scribe(options) {
   // handle options
   options = options || {};
   this.name = options.name || "scribe"; // name of scribe
-  if (options.level) {
-    this.level = levels[options.level.toUpperCase()]
-  } else {
-    this.level = levels.INFO;
-  }
   this.levels = options.levels || levels;
+  if (options.level) {
+    this.level = this.levels[options.level.toUpperCase()]
+  } else {
+    this.level = this.levels.INFO;
+  }
   this.fixed = options.fixed || false; // fixed logging levels
 
   // instance vars
@@ -193,8 +193,8 @@ Scribe.prototype.off = function(msg) {
 Scribe.prototype.setLevel = function(level) {
   if (typeof level === "string") {
     var upper = level.toUpperCase();
-    if (levels.hasOwnProperty(upper)) {
-      this.level = levels[upper];
+    if (this.levels.hasOwnProperty(upper)) {
+      this.level = this.levels[upper];
       return;
     }
   }
@@ -210,7 +210,7 @@ Scribe.prototype.setLevel = function(level) {
 Scribe.prototype.add = function(s) {
   if (s instanceof scripta.Scriptum) {
     if (this.initialized) s.init();
-    s._error = this._error.bind(this, s); //
+    s._error = this._error.bind(this, s);
     s.on("error", s._error);
     this.scripta.push(s);
   } else {
