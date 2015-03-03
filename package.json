@@ -3,10 +3,10 @@
   "repository": "https://github.com/belbis/scribe",
   "version": "0.0.3",
   "scripts": {
-    "test": "mocha test/scribe",
+    "test": "mocha $(find test -name '*.js')",
     "jsdoc": "",
-    "coveralls": "jscoverage src && SCRIBE_COV=1 mocha test/scribe --reporter=mocha-lcov-reporter | coveralls",
-    "cov-html": "jscoverage src && SCRIBE_COV=1 mocha test/scribe --reporter=html-cov > coverage.html",
+    "coveralls": "jscoverage src && SCRIBE_COV=1 mocha $(find test -name '*.js') --reporter=mocha-lcov-reporter | coveralls",
+    "cov-html": "jscoverage src && SCRIBE_COV=1 mocha $(find test -name '*.js') --reporter=html-cov > coverage.html",
     "jscoverage": "jscoverage src src-cov"
   },
   "devDependencies": {

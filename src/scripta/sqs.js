@@ -31,6 +31,7 @@ util.inherits(SQS, Scriptum);
  */
 SQS.prototype.init = function() {
   this.queue = new aws.SQS(this.sqsOptions);
+  this.emit("init");
 };
 
 /**

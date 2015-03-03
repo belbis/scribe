@@ -23,8 +23,7 @@ util.inherits(Scriptum, events.EventEmitter);
  * initializes the scriptum backend
  */
 Scriptum.prototype.init = function() {
-  noop();
-  this.emit("initialized");
+  this.emit("init");
 };
 
 /**
@@ -33,7 +32,6 @@ Scriptum.prototype.init = function() {
  * writes the message
  */
 Scriptum.prototype.post = function(msg, callback) {
-  noop();
   this.emit("posted");
 };
 
