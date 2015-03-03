@@ -94,7 +94,7 @@ Scribe.prototype.log = function(msg, level) {
       var scr = this.scripta[i];
       var upper = scr.level.toUpperCase();
       if (this.levels.hasOwnProperty(upper)) {
-        if (this.fixed && level === this.levelts[upper]) {
+        if (this.fixed && level === this.levels[upper]) {
           scr.post(msg);
         } else if (!this.fixed && level >= this.levels[upper]) {
           scr.post(msg);
@@ -111,7 +111,7 @@ Scribe.prototype.log = function(msg, level) {
  * @param msg {string} message to be logged
  */
 Scribe.prototype.all = function(msg) {
-  this.log(msg, level.ALL);
+  this.log(msg, levels.ALL);
 };
 
 /**
@@ -227,7 +227,7 @@ Scribe.prototype.add = function(s) {
 Scribe.prototype.remove = function(id) {
   for (var i=0;i<this.scripta.length;i++) {
     if (this.scripta[i].id === id) {
-      this.scripta = this.scripta.splice(i);
+      this.scripta.splice(i);
     }
   }
 };

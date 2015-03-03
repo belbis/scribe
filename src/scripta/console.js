@@ -27,11 +27,7 @@ util.inherits(Console, Scriptum);
  * @param {string} msg message to be posted
  */
 Console.prototype.post = function(msg) {
-  if (console[this.level] instanceof Function) {
-    console[this.level](msg);
-  } else {
-    process.stdout.write(msg + "\n");
-  }
+  process.stdout.write(msg + "\n");
   this.emit("logged");
 };
 

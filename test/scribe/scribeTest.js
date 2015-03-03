@@ -64,7 +64,7 @@ describe("Scribe", function() {
       c.shutdown = function() {
         assert(1);
       };
-      s.shutdown()
+      s.shutdown();
     });
   });
 
@@ -79,9 +79,7 @@ describe("Scribe", function() {
     //});
 
     describe("scripta operations", function() {
-
       var s = scribe.getLogger();
-
       describe("add", function() {
         it("should update scripta", function() {
           var c = new scripta.Console({id: "console"});
@@ -91,39 +89,122 @@ describe("Scribe", function() {
       });
 
       describe("remove", function() {
-        s.remove("console");
-        assert.equal(s.scripta.length, 0)
+        it("should update scripta", function() {
+          s.remove("console");
+          assert.equal(s.scripta.length, 0);
+        });
       });
     });
   });
 
-  describe("log", function() {
-
+  describe("logging functions", function() {
     var s = scribe.getLogger();
+    var c = new scripta.Console();
+    s.add(c);
+    var stack = [];
 
-    it("should perform function", function() {
-      // stub stdout to grab message
-      var stack = [];
-
+    it("log", function() {
+      var m = "martini";
       var stub = function() {
-        var write = process.stdout.write;
-        process.stdout.write = (function (write) {
-          return function (buf, encoding, fd) {
-            //write.apply(process.stdout, arguments);
-            stack.push(buf.toString()); // our extra
-          };
-        }(process.stdout.write));
-
-        return function () {
-          process.stdout.write = write
+      var write = process.stdout.write;
+      process.stdout.write = (function (write) {
+        return function (buf, encoding, fd) {
+          //write.apply(process.stdout, arguments);
+          stack.push(buf.toString()); // our extra
         };
+      }(process.stdout.write));
+      return function () {
+        process.stdout.write = write
       };
-      var unStub = stub();
-      var c = new scripta.Console();
-      s.add(c);
-      s.log("message");
-      assert.equal(stack.pop(), "message"+"\n");
+    };
+    var unStub = stub();
+      s.log(m);
       unStub();
+    });
+
+    var lvl = "all";
+    s.setLevel(lvl);
+    it(lvl, function() {
+      var m = "glass";
+      s.log = function(ms, l) {
+        assert.equal(m, ms);
+        assert.equal(scribe.levels.ALL, l);
+      };
+      s.all(m);
+    });
+
+    lvl = "trace";
+    s.setLevel(lvl);
+    it(lvl, function() {
+      var m = "gin";
+      s.log = function(ms, l) {
+        assert.equal(m, ms);
+        assert.equal(scribe.levels.TRACE, l);
+      };
+      s.trace(m);
+    });
+
+    lvl = "debug";
+    s.setLevel(lvl);
+    it(lvl, function() {
+      var m = "gin";
+      s.log = function(ms, l) {
+        assert.equal(m, ms);
+        assert.equal(scribe.levels.DEBUG, l);
+      };
+      s.debug(m);
+    });
+
+    lvl = "info";
+    s.setLevel(lvl);
+    it(lvl, function() {
+      var m = "tonic";
+      s.log = function(ms, l) {
+        assert.equal(m, ms);
+        assert.equal(scribe.levels.INFO, l);
+      };
+      s.info(m);
+    });
+
+    lvl = "warn";
+    s.setLevel(lvl);
+    it(lvl, function() {
+      var m = "tonic";
+      s.log = function(ms, l) {
+        assert.equal(m, ms);
+        assert.equal(scribe.levels.WARN, l);
+      };
+      s.warn(m);
+    });
+
+    lvl = "error";
+    s.setLevel(lvl);
+    it(lvl, function() {
+      var m = "olive";
+      s.log = function(ms, l) {
+        assert.equal(m, ms);
+        assert.equal(scribe.levels.ERROR, l);
+      };
+      s.error(m);
+    });
+
+    lvl = "fatal";
+    s.setLevel(lvl);
+    it(lvl, function() {
+      var m = "onion";
+      s.log = function(ms, l) {
+        assert.equal(m, ms);
+        assert.equal(scribe.levels.FATAL, l);
+      };
+      s.fatal(m);
+    });
+
+    lvl = "off";
+    s.setLevel(lvl);
+    it(lvl, function() {
+      var m = "spear";
+      s.log = function(ms, l) {};
+      s.off(m);
     });
   });
 });
