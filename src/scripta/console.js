@@ -3,22 +3,22 @@
 var util = require("util");
 
 // local imports
-var Scripturum = require(__dirname + "/scripturum").Scripturum;
+var Scriptum = require(__dirname + "/scriptum").Scriptum;
 
 /**
  * Console
  *
- * a scripturum implementation for console output
+ * a scriptum implementation for console output
  * @param [options] options
  * @constructor
  */
 function Console(options) {
-  Scripturum.call(this);
+  Scriptum.call(this);
   options = options || {};
   this.id = options.id || "console";
   this.level = options.level || "info";
 }
-util.inherits(Console, Scripturum);
+util.inherits(Console, Scriptum);
 
 /**
  * post

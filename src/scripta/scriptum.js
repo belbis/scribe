@@ -4,25 +4,25 @@ var events = require("events");
 var util = require("util");
 
 /**
- * Scripturum
+ * Scriptum
  *
  * describes the interface for a backend module
  * of the scribe logger
  * @constructor
  */
-function Scripturum(options) {
+function Scriptum(options) {
   events.EventEmitter.call(this);
   options = options || {};
   this.level = options.level || "info";
 }
-util.inherits(Scripturum, events.EventEmitter);
+util.inherits(Scriptum, events.EventEmitter);
 
 /**
  * init
  *
- * initializes the scripturum backend
+ * initializes the scriptum backend
  */
-Scripturum.prototype.init = function() {
+Scriptum.prototype.init = function() {
   noop();
   this.emit("initialized");
 };
@@ -32,7 +32,7 @@ Scripturum.prototype.init = function() {
  *
  * writes the message
  */
-Scripturum.prototype.post = function(msg, callback) {
+Scriptum.prototype.post = function(msg, callback) {
   noop();
   this.emit("posted");
 };
@@ -40,5 +40,5 @@ Scripturum.prototype.post = function(msg, callback) {
 
 // export module
 module.exports = {
-  Scripturum: Scripturum
+  Scriptum: Scriptum
 };

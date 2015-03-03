@@ -1,7 +1,7 @@
 {
   "name": "node-scribe",
   "repository": "https://github.com/belbis/scribe",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "test": "mocha test/scribe",
     "jsdoc": "",

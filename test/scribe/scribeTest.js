@@ -7,16 +7,13 @@ var assert = require("assert");
 
 // local imports
 var scribe = require(__dirname + "/../../");
-var scriptura = scribe.scriptura;
+var scripta = scribe.scripta;
 
 describe("Scribe", function() {
 
   describe("constructor", function() {
     var s = scribe.getLogger();
     it("should have prototype", function() {
-
-      //(s.prototype, scribe.getLogger.prototype)
-
       assert(s.trace instanceof Function);
       assert(s.debug instanceof Function);
       assert(s.info instanceof Function);
@@ -33,8 +30,8 @@ describe("Scribe", function() {
     describe("without options", function() {
       var s = scribe.getLogger();
       it("should set defaults", function() {
-        assert(s.scriptura instanceof Array);
-        assert.equal(s.scriptura.length, 0);
+        assert(s.scripta instanceof Array);
+        assert.equal(s.scripta.length, 0);
         assert.equal(s.level, scribe.levels["INFO"]);
       });
     });
@@ -44,14 +41,14 @@ describe("Scribe", function() {
         level: "INFO"
       };
       var s = new scribe.getLogger(o);
-      assert.equal(s.level, o.level);
+      assert.equal(s.level, s.levels[o.level]);
     });
   });
 
   describe("init", function() {
     var s = scribe.getLogger();
-    it("should call scriptura init", function() {
-      var c = new scribe.scriptura.Console();
+    it("should call scripta init", function() {
+      var c = new scribe.scripta.Console();
       c.init = function() {
         assert(1);
       };
@@ -62,8 +59,8 @@ describe("Scribe", function() {
 
   describe("shutdown", function() {
     var s = scribe.getLogger();
-    it("should call scriptura shutdown", function() {
-      var c = new scribe.scriptura.Console();
+    it("should call scripta shutdown", function() {
+      var c = new scribe.scripta.Console();
 
     });
 
@@ -79,21 +76,21 @@ describe("Scribe", function() {
     //  });
     //});
 
-    describe("scriptura operations", function() {
+    describe("scripta operations", function() {
 
       var s = scribe.getLogger();
 
       describe("add", function() {
-        it("should update scriptura", function() {
-          var c = new scriptura.Console({id: "console"});
+        it("should update scripta", function() {
+          var c = new scripta.Console({id: "console"});
           s.add(c);
-          assert(s.scriptura[0] instanceof scriptura.Console);
+          assert(s.scripta[0] instanceof scripta.Console);
         });
       });
 
       describe("remove", function() {
         s.remove("console");
-        assert.equal(s.scriptura.length, 0)
+        assert.equal(s.scripta.length, 0)
       });
     });
   });
@@ -120,7 +117,7 @@ describe("Scribe", function() {
         };
       };
       var unStub = stub();
-      var c = new scriptura.Console();
+      var c = new scripta.Console();
       s.add(c);
       s.log("message");
       assert.equal(stack.pop(), "message"+"\n");

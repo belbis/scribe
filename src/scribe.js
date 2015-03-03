@@ -11,7 +11,7 @@ var util = require("util");
 var events = require("events");
 
 // local imports
-var scriptura = require(__dirname + "/scriptura");
+var scripta = require(__dirname + "/scripta");
 
 // logging levels
 var levels = {
@@ -49,7 +49,7 @@ function Scribe(options) {
 
   // instance vars
   this.initialized = false;
-  this.scriptura = [];
+  this.scripta = [];
 }
 util.inherits(Scribe, events.EventEmitter);
 
@@ -61,9 +61,9 @@ util.inherits(Scribe, events.EventEmitter);
  * @param options
  */
 Scribe.prototype.init = function(options) {
-  // initialize all scriptura
-  for (var i=0;i<this.scriptura.length;++i) {
-    this.scriptura[i].init();
+  // initialize all scripta
+  for (var i=0;i<this.scripta.length;++i) {
+    this.scripta[i].init();
   }
 };
 
@@ -75,8 +75,8 @@ Scribe.prototype.init = function(options) {
 Scribe.prototype.shutdown = function() {
   this.log("logger shutting down", level.INFO);
   // shutdown all backends
-  for(var i=0;i>this.scriptura.length;++i) {
-    this.scriptura[i].shutdown();
+  for(var i=0;i>this.scripta.length;++i) {
+    this.scripta[i].shutdown();
   }
 };
 
@@ -91,8 +91,8 @@ Scribe.prototype.shutdown = function() {
 Scribe.prototype.log = function(msg, level) {
   if (!level) level = levels.INFO;
   if (level >= this.level) {
-    for (var i=0;i<this.scriptura.length;i++) {
-      var scr = this.scriptura[i];
+    for (var i=0;i<this.scripta.length;i++) {
+      var scr = this.scripta[i];
       var upper = scr.level.toUpperCase();
       if (this.levels.hasOwnProperty(upper)) {
         if (this.fixed && level === this.levelts[upper]) {
@@ -206,16 +206,16 @@ Scribe.prototype.setLevel = function(level) {
  * add
  *
  * adds a scripture to the logger
- * @param s {Scripturum} scripture to be added
+ * @param s {Scriptum} scripture to be added
  */
 Scribe.prototype.add = function(s) {
-  if (s instanceof scriptura.Scripturum) {
+  if (s instanceof scripta.Scriptum) {
     if (this.initialized) s.init();
     s._error = this._error.bind(this, s); //
     s.on("error", s._error);
-    this.scriptura.push(s);
+    this.scripta.push(s);
   } else {
-    throw new Error("parameter must be instance of Scripturum");
+    throw new Error("parameter must be instance of Scriptum");
   }
 };
 
@@ -226,11 +226,11 @@ Scribe.prototype.add = function(s) {
  * @param id {string} id of scripture to remove
  */
 Scribe.prototype.remove = function(id) {
-  //if ( instanceof scriptura.Scripturum) {
+  //if ( instanceof scripta.Scriptum) {
     // todo: improve efficiency?
-    for (var i=0;i<this.scriptura.length;i++) {
-      if (this.scriptura[i].id === id) {
-        this.scriptura = this.scriptura.splice(i);
+    for (var i=0;i<this.scripta.length;i++) {
+      if (this.scripta[i].id === id) {
+        this.scripta = this.scripta.splice(i);
       }
     }
   //x}
@@ -267,7 +267,7 @@ Scribe.prototype.setLevels = function(lvls) {
 /**
  * _error
  *
- * allows for errors in scriptura to be propogated
+ * allows for errors in scripta to be propogated
  * up to scribe instance
  * @param scr
  * @param error
@@ -281,6 +281,6 @@ Scribe.prototype._error = function(scr, error) {
 // export module
 module.exports = {
   getLogger: Scribe,
-  scriptura: scriptura,
+  scripta: scripta,
   levels: levels
 };

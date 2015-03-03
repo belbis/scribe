@@ -6,23 +6,23 @@ var util = require("util");
 var aws = require("aws-sdk");
 
 // local imports
-var Scripturum = require(__dirname + "/scripturum").Scripturum;
+var Scriptum = require(__dirname + "/scriptum").Scriptum;
 
 /**
  * SQS
  *
  * @param {object} [options] options
- * a Scripturum that writes to Amazon AWS SQS
+ * a Scriptum that writes to Amazon AWS SQS
  */
 function SQS(options) {
-  Scripturum.call(this, options);
+  Scriptum.call(this, options);
 
   options = options || {};
   this.sqsOptions = options.sqs || {}; // sqs constructor options
   this.buffer = options.buffer || false; // buffer messages in batches of 10
   this.queue = null; // sqs
 }
-util.inherits(SQS, Scripturum);
+util.inherits(SQS, Scriptum);
 
 /**
  * init
