@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Scribe by belbis</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Scribe</h1>
+        <p>simple node.js logging module</p>
+
+        <p class="view"><a href="https://github.com/belbis/scribe">View the Project on GitHub <small>belbis/scribe</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/belbis/scribe/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/belbis/scribe/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/belbis/scribe">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <pre><code>               _ _          
+              (_) |         
+ ___  ___ _ __ _| |__   ___ 
+/ __|/ __| '__| | '_ \ / _ \
+\__ \ (__| |  | | |_) |  __/
+|___/\___|_|  |_|_.__/ \___|
+</code></pre>
+
+<p><a href="https://npmjs.org/package/node-scribe"><img src="https://nodei.co/npm/node-scribe.png?downloads=true" alt="NPM Version"></a>
+<a href="http://travis-ci.org/belbis/scribe"><img src="https://secure.travis-ci.org/belbis/scribe.png?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/r/belbis/scribe"><img src="https://coveralls.io/repos/belbis/scribe/badge.svg" alt="Coverage Status"></a>
+<a href="https://gemnasium.com/belbis/scribe"><img src="https://gemnasium.com/belbis/scribe.svg" alt="Dependency Status"></a></p>
+
+<h2>
+<a id="installing" class="anchor" href="#installing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing</h2>
+
+<p>To install the latest release with npm run:</p>
+
+<p><code>npm install scribe</code></p>
+
+<p>to install the development version from github run:</p>
+
+<p><code>npm install "git+https://github.com/belbis/multi-cache"</code></p>
+
+<h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>usage</h2>
+
+<p>stdout example:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> scribe <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">"</span>scribe<span class="pl-pds">"</span></span>);
+
+<span class="pl-s">var</span> logger <span class="pl-k">=</span> scribe.getLogger();
+<span class="pl-s">var</span> scr <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">scribe.scriptura</span>.Console();
+logger.<span class="pl-s3">add</span>(scr);
+logger<span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>shaken, not stirred.<span class="pl-pds">"</span></span>);</pre></div>
+
+<p>file example:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> scribe <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">"</span>scribe<span class="pl-pds">"</span></span>);
+
+<span class="pl-s">var</span> logger <span class="pl-k">=</span> scribe.getLogger();
+<span class="pl-s">var</span> scr <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">scribe.scriptura</span>.File();
+logger.<span class="pl-s3">add</span>(scr);
+logger<span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>shaken, not stirred.<span class="pl-pds">"</span></span>);</pre></div>
+
+<p>Amazon AWS SQS example:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> scribe <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">"</span>scribe<span class="pl-pds">"</span></span>);
+
+<span class="pl-s">var</span> logger <span class="pl-k">=</span> scribe.getLogger();
+<span class="pl-s">var</span> scr <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">scribe.scriptura</span>.SQS();
+logger.<span class="pl-s3">add</span>(scr);
+logger<span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>shaken, not stirred.<span class="pl-pds">"</span></span>);</pre></div>
+
+<h2>
+<a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span class="octicon octicon-link"></span></a>disclaimer</h2>
+
+<p>this project is currently in development</p>
+
+<h2>
+<a id="future" class="anchor" href="#future" aria-hidden="true"><span class="octicon octicon-link"></span></a>future</h2>
+
+<p>expand scriptura, extend testing</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/belbis">belbis</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
