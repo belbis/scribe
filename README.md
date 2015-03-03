@@ -21,7 +21,7 @@ To install the latest release with npm run:
 
 to install the development version from github run:
 
-```npm install "git+https://github.com/belbis/multi-cache"```
+```npm install "git+https://github.com/belbis/scribe"```
 
 ## Introduction
 
