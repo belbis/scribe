@@ -48,7 +48,7 @@ describe("Scribe", function() {
   describe("init", function() {
     var s = scribe.getLogger();
     it("should call scripta init", function() {
-      var c = new scribe.scripta.Console();
+      var c = new scribe.scripta.STDOut();
       c.init = function() {
         assert(1);
       };
@@ -60,7 +60,7 @@ describe("Scribe", function() {
   describe("shutdown", function() {
     var s = scribe.getLogger();
     it("should call scripta shutdown", function() {
-      var c = new scribe.scripta.Console();
+      var c = new scribe.scripta.STDOut();
       c.shutdown = function() {
         assert(1);
       };
@@ -107,9 +107,9 @@ describe("Scribe", function() {
     var s = scribe.getLogger();
     describe("add", function() {
       it("should update scripta", function() {
-        var c = new scripta.Console({id: "console"});
+        var c = new scripta.STDOut({id: "console"});
         s.add(c);
-        assert(s.scripta[0] instanceof scripta.Console);
+        assert(s.scripta[0] instanceof scripta.STDOut);
       });
     });
 
@@ -123,7 +123,7 @@ describe("Scribe", function() {
 
   describe("logging functions", function() {
     var s = scribe.getLogger();
-    var c = new scripta.Console();
+    var c = new scripta.STDOut();
     s.add(c);
     var stack = [];
 

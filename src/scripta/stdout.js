@@ -6,19 +6,19 @@ var util = require("util");
 var Scriptum = require(__dirname + "/scriptum").Scriptum;
 
 /**
- * Console
+ * STDOut
  *
  * a scriptum implementation for console output
  * @param [options] options
  * @constructor
  */
-function Console(options) {
+function STDOut(options) {
   Scriptum.call(this);
   options = options || {};
   this.id = options.id || "console";
   this.level = options.level || "info";
 }
-util.inherits(Console, Scriptum);
+util.inherits(STDOut, Scriptum);
 
 /**
  * post
@@ -26,7 +26,7 @@ util.inherits(Console, Scriptum);
  * writes a message to the console
  * @param {string} msg message to be posted
  */
-Console.prototype.post = function(msg) {
+STDOut.prototype.post = function(msg) {
   process.stdout.write(msg + "\n");
   this.emit("logged");
 };
@@ -34,5 +34,5 @@ Console.prototype.post = function(msg) {
 
 // export module
 module.exports = {
-  Console: Console
+  STDOut: STDOut
 };
