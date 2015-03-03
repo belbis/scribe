@@ -31,8 +31,17 @@ Scriptum.prototype.init = function() {
  *
  * writes the message
  */
-Scriptum.prototype.post = function(msg, callback) {
+Scriptum.prototype.post = function(msg) {
   this.emit("posted");
+};
+
+/**
+ * shutdown
+ *
+ * shutdown any remote connection
+ */
+Scriptum.prototype.shutdown = function() {
+  this.emit("shutdown");
 };
 
 

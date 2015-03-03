@@ -30,5 +30,14 @@ describe("Scriptum", function() {
         s.post("msg");
       });
     });
+
+    describe("#shutdown", function() {
+      it("should noop and emit", function(done) {
+        var s = new Scriptum();
+        s.on("shutdown", done);
+        s.shutdown();
+      })
+    });
+
   });
 });

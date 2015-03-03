@@ -39,5 +39,14 @@ describe("SQS", function() {
         s.post(m);
       });
     });
+
+    describe("#shutdown", function() {
+      it("should nullify remote queue and emit", function(done) {
+        var s = new SQS();
+        s.init();
+        s.on("shutdown",done);
+        s.shutdown();
+      });
+    });
   });
 });

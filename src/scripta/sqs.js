@@ -78,6 +78,7 @@ SQS.prototype._constructMessage = function(msg) {
  */
 SQS.prototype.shutdown = function() {
   this.queue = null;
+  this.emit("shutdown");
 };
 
 
