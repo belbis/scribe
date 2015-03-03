@@ -61,10 +61,12 @@ describe("Scribe", function() {
     var s = scribe.getLogger();
     it("should call scripta shutdown", function() {
       var c = new scribe.scripta.Console();
-
+      c.shutdown = function() {
+        assert(1);
+      };
+      s.shutdown()
     });
-
-  })
+  });
 
   describe("setters", function() {
     //describe("setLevel", function() {

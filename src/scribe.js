@@ -73,8 +73,7 @@ Scribe.prototype.init = function(options) {
  * shut the logger down
  */
 Scribe.prototype.shutdown = function() {
-  this.log("logger shutting down", level.INFO);
-  // shutdown all backends
+  this.log("logger shutting down", levels.INFO);
   for(var i=0;i>this.scripta.length;++i) {
     this.scripta[i].shutdown();
   }
@@ -226,14 +225,11 @@ Scribe.prototype.add = function(s) {
  * @param id {string} id of scripture to remove
  */
 Scribe.prototype.remove = function(id) {
-  //if ( instanceof scripta.Scriptum) {
-    // todo: improve efficiency?
-    for (var i=0;i<this.scripta.length;i++) {
-      if (this.scripta[i].id === id) {
-        this.scripta = this.scripta.splice(i);
-      }
+  for (var i=0;i<this.scripta.length;i++) {
+    if (this.scripta[i].id === id) {
+      this.scripta = this.scripta.splice(i);
     }
-  //x}
+  }
 };
 
 /**
