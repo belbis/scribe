@@ -6,6 +6,22 @@ var fs = require("fs");
 // local imports
 var Stream = require("../../").scripta.Stream;
 
+// for use with writing to stdout
+var stack = [];
+var stub = function() {
+  var write = process.stdout.write;
+  process.stdout.write = (function (write) {
+    return function (buf, encoding, fd) {
+      //write.apply(process.stdout, arguments);
+      stack.push(buf.toString()); // our extra
+    };
+  }(process.stdout.write));
+  return function () {
+    process.stdout.write = write
+  };
+};
+
+// test cases
 describe("Stream", function() {
   describe("functions", function() {
     describe("constructor", function() {
@@ -46,7 +62,9 @@ describe("Stream", function() {
       it("should log and emit", function(done) {
         var s = new Stream();
         s.setStream(process.stdout);
+        var unStub = stub();
         s.write("msg", null, done);
+        unStub();
       });
     });
 
@@ -55,7 +73,7 @@ describe("Stream", function() {
         var s = new Stream();
         s.on("close", done);
         s.close();
-      })
-    })
+      });
+    });
   });
 });
