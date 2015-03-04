@@ -68,7 +68,7 @@ File.prototype._open_cb = function(fd) {
  */
 File.prototype._close = function() {
   if (this._stream) {
-    fs.close(this._stream, this._close_cb.bind(this));
+    this._stream.end(this._close_cb.bind(this));
   } else {
     this._close_cb(null, true);
   }

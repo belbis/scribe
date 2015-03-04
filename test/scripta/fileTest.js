@@ -59,7 +59,7 @@ describe("File", function() {
         };
         var s = new File(options);
         s.open();
-        var _write_cb =  function() {
+        var _write_cb =  function() { // clean up tmp file
           fs.unlinkSync(path.join(options.dir, options.file));
           fs.rmdirSync(options.dir);
           done();
@@ -69,13 +69,28 @@ describe("File", function() {
     });
 
     describe("#close", function() {
-      it("should close file stream and emit close", function(done) {
+      it("no open file stream should emit close", function(done) {
         var s = new File();
         s.on("close", function() {
           done();
         });
         s.close();
-      })
+      });
+
+      it("open file stream should close stream and emit close", function(done) {
+        var options = {
+          dir: __dirname + "/../tmp/",
+          file: "out.log"
+        };
+        var s = new File(options);
+        s.open();
+        s.on("close", function() { // clean up tmp file
+          fs.unlinkSync(path.join(options.dir, options.file));
+          fs.rmdirSync(options.dir);
+          done();
+        });
+        s.close();
+      });
     })
   });
 });
