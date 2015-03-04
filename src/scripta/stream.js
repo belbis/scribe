@@ -44,13 +44,24 @@ Stream.prototype._open = function() {
  * @private
  */
 Stream.prototype._write = function(msg, encoding, callback) {
+
+  if (!callback) {
+    if (util.isFunction(encoding)) {
+      callback = encoding;
+      encoding = null;
+    } else {
+      callback = function() {};
+    }
+  }
+
   var buf;
   if (this.addNewLine) {
     buf = new Buffer(msg+"\n"); // for readability
   } else {
     buf = msg;
   }
-  this._stream.write(buf, encoding, callback);
+  this._stream.write(buf, encoding);
+  callback();
 };
 
 /**
