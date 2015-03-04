@@ -4,22 +4,9 @@ var assert = require("assert");
 var fs = require("fs");
 
 // local imports
-var Stream = require("../../").scripta.Stream;
-
-// for use with writing to stdout
-var stack = [];
-var stub = function() {
-  var write = process.stdout.write;
-  process.stdout.write = (function (write) {
-    return function (buf, encoding, fd) {
-      //write.apply(process.stdout, arguments);
-      stack.push(buf.toString()); // our extra
-    };
-  }(process.stdout.write));
-  return function () {
-    process.stdout.write = write
-  };
-};
+var scripta = require("../../").scripta,
+  Stream = scripta.Stream,
+  DevNull = scripta.DevNull;
 
 // test cases
 describe("Stream", function() {
@@ -33,7 +20,7 @@ describe("Stream", function() {
 
     describe("setters", function() {
       it("#setStream", function() {
-        var stream = process.stdout;
+        var stream = new DevNull();
         var s = new Stream();
         s.setStream(stream);
         assert.deepEqual(s._stream, stream); // todo: not use private var check
@@ -45,7 +32,9 @@ describe("Stream", function() {
     describe("#open", function() { // inherited from Scriptum
       it("should check that stream is writable and emit", function(done) {
         var s = new Stream();
-        s.setStream(process.stdout);
+        var dn = new DevNull();
+        dn.open();
+        s.setStream(dn);
         s.on("open", function() {
           done();
         });
@@ -61,10 +50,10 @@ describe("Stream", function() {
     describe("#write", function() {
       it("should log and emit", function(done) {
         var s = new Stream();
-        s.setStream(process.stdout);
-        var unStub = stub();
+        var dn = new DevNull();
+        dn.open();
+        s.setStream(dn);
         s.write("msg", null, done);
-        unStub();
       });
     });
 
