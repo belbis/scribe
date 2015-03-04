@@ -17,6 +17,8 @@ a stream logging module for node.js
 
 ## Installing
 
+[![Join the chat at https://gitter.im/belbis/scribe](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/belbis/scribe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 To install the latest release with npm run:
 
 ```npm install scribe```
