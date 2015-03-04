@@ -1,7 +1,16 @@
 {
   "name": "node-scribe",
+  "author": "Michael Dreibelbis <mike at belbis dot com>",
+  "homepage": "http://belbis.github.io/scribe/",
   "repository": "https://github.com/belbis/scribe",
   "version": "0.1.2",
+  "keywords": [
+    "logging",
+    "scribe",
+    "node-scribe",
+    "stream",
+    "log"
+  ],
   "scripts": {
     "test": "mocha $(find test -name '*.js')",
     "jsdoc": "",

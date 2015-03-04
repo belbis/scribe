@@ -11,9 +11,11 @@ a stream logging module for node.js
                             
 
 [![NPM Version](https://nodei.co/npm/node-scribe.png?downloads=true)](https://npmjs.org/package/node-scribe)
-[![Build Status](https://secure.travis-ci.org/belbis/scribe.png?branch=master)](http://travis-ci.org/belbis/scribe)
-[![Coverage Status](https://coveralls.io/repos/belbis/scribe/badge.svg)](https://coveralls.io/r/belbis/scribe)
-[![Dependency Status](https://gemnasium.com/belbis/scribe.svg)](https://gemnasium.com/belbis/scribe)
+
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/belbis/scribe)
+
+
+[![Build Status](https://secure.travis-ci.org/belbis/scribe.png?branch=master)](http://travis-ci.org/belbis/scribe) [![Coverage Status](https://coveralls.io/repos/belbis/scribe/badge.svg)](https://coveralls.io/r/belbis/scribe) [![Dependency Status](https://gemnasium.com/belbis/scribe.svg)](https://gemnasium.com/belbis/scribe)
 
 ## Installing
 
