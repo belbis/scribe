@@ -3,7 +3,7 @@
   "author": "Michael Dreibelbis <mike at belbis dot com>",
   "homepage": "http://belbis.github.io/scribe/",
   "repository": "https://github.com/belbis/scribe",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "keywords": [
     "logging",
     "scribe",
