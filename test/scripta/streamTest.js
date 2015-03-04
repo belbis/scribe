@@ -11,8 +11,7 @@ describe("Stream", function() {
     describe("constructor", function() {
       it("prototype check", function() {
         var s = new Stream();
-        assert(s.init instanceof Function);
-        assert(s.post instanceof Function);
+        assert.deepEqual(s.__proto__, Stream.prototype);
       });
     });
 
@@ -21,33 +20,41 @@ describe("Stream", function() {
         var stream = process.stdout;
         var s = new Stream();
         s.setStream(stream);
-        assert.deepEqual(s.stream, stream);
+        assert.deepEqual(s._stream, stream); // todo: not use private var check
       });
+
+      // todo: add test for check on writable
     });
 
-    describe("#init", function() { // inherited from Scriptum
-      it("should noop and emit", function(done) {
+    describe("#open", function() { // inherited from Scriptum
+      it("should check that stream is writable and emit", function(done) {
         var s = new Stream();
-        s.on("init", done);
-        s.init();
+        s.setStream(process.stdout);
+        s.on("open", function() {
+          done();
+        });
+        s.open();
+      });
+
+      it("should error if stream is not writable", function() {
+        var s = new Stream();
+        assert.throws(s.open, Error);
       });
     });
 
-    describe("#post", function() {
+    describe("#write", function() {
       it("should log and emit", function(done) {
         var s = new Stream();
-        var stream = process.stdout;
         s.setStream(process.stdout);
-        s.on("posted", done);
-        s.post("msg");
+        s.write("msg", null, done);
       });
     });
 
-    describe("#shutdown", function() {
+    describe("#close", function() {
       it("should noop and emit", function(done) {
         var s = new Stream();
-        s.on("shutdown", done);
-        s.shutdown();
+        s.on("close", done);
+        s.close();
       })
     })
   });

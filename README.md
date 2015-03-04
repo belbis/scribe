@@ -25,6 +25,16 @@ to install the development version from github run:
 
 ## Introduction
 
+Scribe is a logging library for node.js that utilizes writeStreams. 
+
+## Scripta
+
+Scripta is just plural of Scriptum which are the writeStreams implemented for Scribe. Currently these scripta are supported:
+
+* SQS - AWS SQS scriptum write stream
+* Stream - generic write scriptum stream scripta
+* File - stream scriptum that writes to file
+* STDOut - stream scriptum that writes to stdout
 
 ## usage
 
@@ -33,9 +43,11 @@ stdout example:
 var scribe = require("scribe");
 
 var logger = scribe.getLogger();
-var scr = new scribe.scriptura.Console();
+var scr = new scribe.scripta.STDOut({addNewLine: true});
+logger.open();
 logger.add(scr);
 logger.log("shaken, not stirred.");
+logger.close();
 ```
 
 file example:
@@ -43,17 +55,20 @@ file example:
 var scribe = require("scribe");
 
 var logger = scribe.getLogger();
-var scr = new scribe.scriptura.File();
+var scr = new scribe.scripta.File({addNewLine: true});
+logger.open();
 logger.add(scr);
 logger.log("shaken, not stirred.");
+logger.close();
 ```
 
-Amazon AWS SQS example:
+AWS SQS example:
 ```javascript
 var scribe = require("scribe");
 
 var logger = scribe.getLogger();
-var scr = new scribe.scriptura.SQS();
+var scr = new scribe.scripta.SQS();
+logger.open();
 logger.add(scr);
 logger.log("shaken, not stirred.");
 ```
@@ -64,4 +79,4 @@ this project is currently in development
 
 ## future
 
-expand scriptura, extend testing
+allow for read as duplex stream?

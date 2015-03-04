@@ -3,12 +3,12 @@
 var fs = require("fs");
 
 var scripta = {};
-var scriptureDir = __dirname + "/scripta";
+var scriptaDir = __dirname + "/scripta";
 
 // load scripta
-var files = fs.readdirSync(scriptureDir).forEach(function(file) {
-  var scripturumPath = scriptureDir + "/" + file;
-  var mod = require(scripturumPath);
+var files = fs.readdirSync(scriptaDir).forEach(function(file) {
+  var scriptaPath = scriptaDir + "/" + file;
+  var mod = require(scriptaPath);
   var key = Object.keys(mod)[0];
   scripta[key] = mod[key];
 });

@@ -1,5 +1,6 @@
 
 // standard imports
+var stream = require("stream");
 var events = require("events");
 var util = require("util");
 
@@ -7,33 +8,47 @@ var util = require("util");
  * Scriptum
  *
  * describes the interface for a backend module
- * of the scribe logger
+ * of the scribe logger. all scripta are implemented
+ * as writable streams
  * @constructor
  */
 function Scriptum(options) {
-  events.EventEmitter.call(this);
+  stream.Writable.call(this);
   options = options || {};
   this.level = options.level || "info";
 }
-util.inherits(Scriptum, events.EventEmitter);
-
+util.inherits(Scriptum, stream.Writable);
 
 /**
  * init
  *
- * initializes the scriptum backend
+ * initializes the scriptum stream
  */
-Scriptum.prototype.init = function() {
-  this.emit("init");
+Scriptum.prototype.open = function() {
+  this._open();
 };
 
 /**
- * post
+ * _open
  *
- * writes the message
+ * opens any remote connections for writing
+ * @private
  */
-Scriptum.prototype.post = function(msg) {
-  this.emit("posted");
+Scriptum.prototype._open = function() {
+  throw new Error("_open should be implemented by subclasses");
+};
+
+/**
+ * _write
+ *
+ *
+ * @param chunk
+ * @param encoding
+ * @param callback
+ * @private
+ */
+Scriptum.prototype._write = function(chunk, encoding, callback) {
+  throw new Error("_write should be implemented by subclasses");
 };
 
 /**
@@ -41,20 +56,42 @@ Scriptum.prototype.post = function(msg) {
  *
  * shutdown any remote connection
  */
-Scriptum.prototype.shutdown = function() {
-  this.emit("shutdown");
+Scriptum.prototype.close = function() {
+  this._close();
+};
+
+/**
+ * _close
+ *
+ * closes any connections previously opened
+ * @private
+ */
+Scriptum.prototype._close = function() {
+  throw new Error("_close should be implemented by subclasses");
+};
+
+/**
+ * error
+ *
+ * wrap around subclass _error implementations
+ * @param e
+ */
+Scriptum.prototype.error = function(e) {
+  this._error(e);
 };
 
 /**
  * _error
  *
- * used to propogate error to scribe
+ * error handler
  * @param e
  * @private
  */
 Scriptum.prototype._error = function(e) {
-  this.emit("error", e)
+  throw new Error("_error should be implemented by subclasses");
 };
+
+
 
 
 // export module

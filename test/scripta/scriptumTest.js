@@ -10,32 +10,28 @@ describe("Scriptum", function() {
     describe("constructor", function() {
       it("prototype check", function() {
         var s = new Scriptum();
-        assert(s.init instanceof Function);
-        assert(s.post instanceof Function);
+        assert.deepEqual(s.__proto__, Scriptum.prototype);
       });
     });
 
-    describe("#init", function() {
-      it("should noop and emit", function(done) {
+    describe("#open", function() {
+      it("should throw error", function() {
         var s = new Scriptum();
-        s.on("init", done);
-        s.init();
+        assert.throws(s.open, Error);
       });
     });
 
-    describe("#post", function() {
-      it("should noop and emit", function(done) {
+    describe("#write", function() {
+      it("should throw error", function() {
         var s = new Scriptum();
-        s.on("posted", done);
-        s.post("msg");
+        assert.throws(s._write, Error);
       });
     });
 
-    describe("#shutdown", function() {
-      it("should noop and emit", function(done) {
+    describe("#close", function() {
+      it("should throw error", function() {
         var s = new Scriptum();
-        s.on("shutdown", done);
-        s.shutdown();
+        assert.throws(s.close, Error);
       })
     });
 

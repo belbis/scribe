@@ -10,35 +10,31 @@ describe("STDOut", function() {
     describe("constructor", function() {
       it("prototype check", function() {
         var s = new STDOut();
-        assert(s.init instanceof Function);
-        assert(s.post instanceof Function);
+        assert.deepEqual(s.__proto__, STDOut.prototype);
       });
     });
 
-    describe("#init", function() { // inherited from Scriptum
+    describe("#open", function() { // inherited from Scriptum
       it("should noop and emit", function(done) {
         var s = new STDOut();
-        s.on("init", done);
-        s.init();
+        s.on("open", done);
+        s.open();
       });
     });
 
-    describe("#post", function() {
+    describe("#write", function() {
       it("should log and emit", function(done) {
         var s = new STDOut();
-        s.on("posted", function() {
-
-          done();
-        });
-        s.post("msg");
+        s.open();
+        s.write("msg", null, done);
       });
     });
 
-    describe("#shutdown", function() {
+    describe("#close", function() {
       it("should noop and emit", function(done) {
         var s = new STDOut();
-        s.on("shutdown", done);
-        s.shutdown();
+        s.on("close", done);
+        s.close();
       })
     })
   });

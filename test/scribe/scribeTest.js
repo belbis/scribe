@@ -14,17 +14,7 @@ describe("Scribe", function() {
   describe("constructor", function() {
     var s = scribe.getLogger();
     it("should have prototype", function() {
-      assert(s.trace instanceof Function);
-      assert(s.debug instanceof Function);
-      assert(s.info instanceof Function);
-      assert(s.warn instanceof Function);
-      assert(s.error instanceof Function);
-      assert(s.fatal instanceof Function);
-      assert(s.off instanceof Function);
-      assert(s.info instanceof Function);
-      assert(s.add instanceof Function);
-      assert(s.remove instanceof Function);
-      assert(s.getLevel instanceof Function);
+      assert.deepEqual(s.__proto__, scribe.getLogger.prototype);
     });
 
     describe("without options", function() {
@@ -45,27 +35,29 @@ describe("Scribe", function() {
     });
   });
 
-  describe("init", function() {
+  describe("open", function() {
     var s = scribe.getLogger();
-    it("should call scripta init", function() {
+    it("should call scripta open", function() {
       var c = new scribe.scripta.STDOut();
-      c.init = function() {
+      c.open = function() {
         assert(1);
       };
       s.add(c);
-      s.init();
+      s.open();
     });
   });
 
-  describe("shutdown", function() {
+  describe("close", function() {
     var s = scribe.getLogger();
-    it("should call scripta shutdown", function() {
+    it("should call scripta close", function() {
       var c = new scribe.scripta.STDOut();
+
       s.add(c);
-      c.shutdown = function() {
+      s.open();
+      c.close = function() {
         assert(1);
       };
-      s.shutdown();
+      s.close();
     });
   });
 

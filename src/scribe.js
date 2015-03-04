@@ -48,35 +48,35 @@ function Scribe(options) {
   this.fixed = options.fixed || false; // fixed logging levels
 
   // instance vars
-  this.initialized = false;
+  this.isOpen = false;
   this.scripta = [];
 }
 util.inherits(Scribe, events.EventEmitter);
 
 /**
- * init
+ * open
  *
  * starts up the logger and makes any scripture
  * connections available
  * @param options
  */
-Scribe.prototype.init = function(options) {
-  // initialize all scripta
+Scribe.prototype.open = function(options) {
+  // openialize all scripta
   for (var i=0;i<this.scripta.length;++i) {
-    this.scripta[i].init();
+    this.scripta[i].open();
   }
-  this.initialized = true;
+  this.isOpen = true;
 };
 
 /**
- * shutdown
+ * close
  *
  * shut the logger down
  */
-Scribe.prototype.shutdown = function() {
+Scribe.prototype.close = function() {
   this.log("logger shutting down", levels.INFO);
   for(var i=0;i>this.scripta.length;++i) {
-    this.scripta[i].shutdown();
+    this.scripta[i].close();
   }
 };
 
@@ -96,9 +96,9 @@ Scribe.prototype.log = function(msg, level) {
       var upper = scr.level.toUpperCase();
       if (this.levels.hasOwnProperty(upper)) {
         if (this.fixed && level === this.levels[upper]) {
-          scr.post(msg);
+          scr.write(msg);
         } else if (!this.fixed && level >= this.levels[upper]) {
-          scr.post(msg);
+          scr.write(msg);
         }
       }
     }
@@ -210,7 +210,7 @@ Scribe.prototype.setLevel = function(level) {
  */
 Scribe.prototype.add = function(s) {
   if (s instanceof scripta.Scriptum) {
-    if (this.initialized) s.init();
+    if (this.isOpen) s.open();
     s._error = this._error.bind(this, s);
     s.on("error", s._error);
     this.scripta.push(s);

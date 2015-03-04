@@ -12,13 +12,13 @@ describe("File", function() {
     describe("constructor", function() {
       it("prototype check", function() {
         var s = new File();
-        assert(s.init instanceof Function);
-        assert(s.post instanceof Function);
+        assert(s.open instanceof Function);
+        assert(s.write instanceof Function);
       });
     });
 
     describe("setters", function() {
-      it("#setStream", function() {
+    /*  it("#setStream", function() {
         var testDir = __dirname + "/../tmp";
         if (!fs.existsSync(testDir)) {
           fs.mkdir(testDir);
@@ -32,50 +32,49 @@ describe("File", function() {
         stream.close();
         fs.unlinkSync(filePath);
         fs.rmdirSync(testDir);
-      });
+      });*/
     });
 
-    describe("#init", function() { // inherited from Scriptum
-      it("should create file stream and emit init", function(done) {
+    describe("#open", function() { // inherited from Scriptum
+      it("should create file stream and emit open", function(done) {
         var options = {
           dir: __dirname + "/../tmp/",
           file: "out.log"
         };
         var s = new File(options);
-        s.on("init", function(f) {
+        s.on("open", function(f) {
           fs.unlinkSync(path.join(options.dir, options.file));
           fs.rmdirSync(options.dir);
-          assert(typeof f === "number");
           done();
         });
-        s.init();
+        s.open();
       });
     });
 
-    describe("#post", function() {
+    describe("#write", function() {
       it("should log and emit", function(done) {
         var options = {
           dir: __dirname + "/../tmp/",
           file: "out.log"
         };
         var s = new File(options);
-        s.init();
-        s.on("posted", function() {
+        s.open();
+        var _write_cb =  function() {
           fs.unlinkSync(path.join(options.dir, options.file));
-          fs.rmdirSync(options.dir)
+          fs.rmdirSync(options.dir);
           done();
-        });
-        s.post("msg");
+        };
+        s.write("msg", null, _write_cb);
       });
     });
 
-    describe("#shutdown", function() {
-      it("should close file stream and emit shutdown", function(done) {
+    describe("#close", function() {
+      it("should close file stream and emit close", function(done) {
         var s = new File();
-        s.on("shutdown", function(d) {
-          done()
+        s.on("close", function() {
+          done();
         });
-        s.shutdown();
+        s.close();
       })
     })
   });

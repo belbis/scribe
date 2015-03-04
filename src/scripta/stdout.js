@@ -3,7 +3,7 @@
 var util = require("util");
 
 // local imports
-var Scriptum = require(__dirname + "/scriptum").Scriptum;
+var Stream = require(__dirname + "/stream").Stream;
 
 /**
  * STDOut
@@ -13,24 +13,32 @@ var Scriptum = require(__dirname + "/scriptum").Scriptum;
  * @constructor
  */
 function STDOut(options) {
-  Scriptum.call(this);
+  Stream.call(this, options);
   options = options || {};
   this.id = options.id || "console";
   this.level = options.level || "info";
 }
-util.inherits(STDOut, Scriptum);
+util.inherits(STDOut, Stream);
 
 /**
- * post
+ * _open
  *
- * writes a message to the console
- * @param {string} msg message to be posted
+ * sets stream to be stdout
+ * @private
  */
-STDOut.prototype.post = function(msg) {
-  process.stdout.write(msg + "\n");
-  this.emit("posted");
+STDOut.prototype._open = function() {
+  this.setStream(process.stdout);
+  this.emit("open");
 };
 
+/**
+ * _close
+ * @private
+ */
+STDOut.prototype._close = function() {
+  this._stream = null;
+  this.emit('close');
+};
 
 // export module
 module.exports = {
