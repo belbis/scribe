@@ -92,8 +92,6 @@ Scriptum.prototype._error = function(e) {
 };
 
 
-
-
 // export module
 module.exports = {
   Scriptum: Scriptum
