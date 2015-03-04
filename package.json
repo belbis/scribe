@@ -1,14 +1,13 @@
 {
   "name": "node-scribe",
   "repository": "https://github.com/belbis/scribe",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "test": "mocha $(find test -name '*.js')",
     "jsdoc": "",
     "coveralls": "jscoverage src && SCRIBE_COV=1 mocha $(find test -name '*.js') --reporter=mocha-lcov-reporter | coveralls",
-    "cov-html": "jscoverage src && SCRIBE_COV=1 mocha $(find test -name '*.js') --reporter=html-cov > coverage.html",
     "jscoverage": "jscoverage src",
-    "cov-mocha": "jscoverage src && SCRIBE_COV=1 mocha $(find test -name '*.js') --reporter=html-cov > coverage.html",
+    "cov-html": "jscoverage src && SCRIBE_COV=1 mocha $(find test -name '*.js') --reporter=html-cov > coverage.html",
     "sqs": "mocha test/scripta/sqsTest.js"
   },
   "devDependencies": {
