@@ -35,13 +35,9 @@ describe("SQS", function() {
           !e && done();
         };
 
+        // todo: not stub private var?
         s._queue ={sendMessage: function(msg, cb){cb(0,1)}};
 
-        //s._queue.sendMessage = function(msg, cb) { // todo: not stub private var?
-        //  assert.deepEqual(msg, {MessageBody: m});
-        //  console.log(cb);
-        //  cb(0, 1);
-        //};
         s.write(m, null, _write_cb);
       });
 
