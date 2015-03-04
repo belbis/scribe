@@ -1,4 +1,5 @@
 
+a stream logging module for node.js
                    _ _          
                   (_) |         
      ___  ___ _ __ _| |__   ___ 
