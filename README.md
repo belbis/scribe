@@ -29,7 +29,7 @@ to install the development version from github run:
 
 ## Introduction
 
-Scribe is a logging library for node.js that utilizes writeStreams. 
+Scribe is a logging library for node.js that utilizes writeStreams.
 
 ## Scripta
 
@@ -37,8 +37,9 @@ Scripta is just plural of Scriptum which are the writeStreams implemented for Sc
 
 * SQS - AWS SQS scriptum write stream
 * Stream - generic write scriptum stream scripta
-* File - stream scriptum that writes to file
-* STDOut - stream scriptum that writes to stdout
+* File - write to file
+* STDOut - write to stdout
+* DevNull -- write to /dev/null (currently only linux supported)
 
 ## usage
 
@@ -83,4 +84,6 @@ this project is currently in development
 
 ## future
 
-allow for read as duplex stream?
+allow for read as duplex stream
+
+get devnull working on windows
