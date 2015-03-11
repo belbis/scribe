@@ -60,6 +60,7 @@ Stream.prototype._write = function(msg, encoding, callback) {
   } else {
     buf = msg;
   }
+
   this._stream.write(buf, encoding);
   callback();
 };
