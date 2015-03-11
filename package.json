@@ -26,6 +26,6 @@
     "coveralls": "2.11.2"
   },
   "dependencies": {
-    "aws-sdk": "2.1.14"
+    "aws-sdk": "2.1.16"
   }
 }
