@@ -5,3 +5,4 @@ var scr = new scribe.scripta.SQS();
 logger.open();
 logger.add(scr);
 logger.log("shaken, not stirred.");
+logger.close();
