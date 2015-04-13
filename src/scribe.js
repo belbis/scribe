@@ -61,7 +61,7 @@ util.inherits(Scribe, events.EventEmitter);
  * @param options
  */
 Scribe.prototype.open = function(options) {
-  // openialize all scripta
+  // initialize all scripta
   for (var i=0;i<this.scripta.length;++i) {
     this.scripta[i].open();
   }
