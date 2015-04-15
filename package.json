@@ -20,7 +20,7 @@
     "sqs": "mocha test/scripta/sqsTest.js"
   },
   "devDependencies": {
-    "mocha": "2.2.1",
+    "mocha": "2.2.4",
     "mocha-lcov-reporter": "0.0.2",
     "jscoverage": "0.5.9",
     "coveralls": "2.11.2"
