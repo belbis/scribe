@@ -17,6 +17,8 @@ a stream logging module for node.js
 
 [![Build Status](https://secure.travis-ci.org/belbis/scribe.png?branch=master)](http://travis-ci.org/belbis/scribe) [![Coverage Status](https://coveralls.io/repos/belbis/scribe/badge.svg)](https://coveralls.io/r/belbis/scribe) [![Dependency Status](https://gemnasium.com/belbis/scribe.svg)](https://gemnasium.com/belbis/scribe)
 
+[![Inline docs](http://inch-ci.org/github/belbis/scribe.svg?branch=master)](http://inch-ci.org/github/belbis/scribe)
+
 ## Installing
 
 To install the latest release with npm run:
