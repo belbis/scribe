@@ -58,13 +58,15 @@ describe("File", function() {
           file: "out.log"
         };
         var s = new File(options);
-        s.open();
         var _write_cb =  function() { // clean up tmp file
           fs.unlinkSync(path.join(options.dir, options.file));
           fs.rmdirSync(options.dir);
           done();
         };
-        s.write("msg", null, _write_cb);
+        s.on("open", function() {
+          s.write("msg", null, _write_cb);
+        });
+        s.open();
       });
     });
 
@@ -83,13 +85,16 @@ describe("File", function() {
           file: "out.log"
         };
         var s = new File(options);
-        s.open();
+        s.on("open", function() {
+          s.close();
+        });
         s.on("close", function() { // clean up tmp file
           fs.unlinkSync(path.join(options.dir, options.file));
           fs.rmdirSync(options.dir);
           done();
         });
-        s.close();
+        s.open();
+        //s.close();
       });
     })
   });
